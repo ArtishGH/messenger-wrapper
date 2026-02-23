@@ -69,7 +69,7 @@ class MessengerWrapper(QMainWindow):
         self.overlay_layout.addWidget(self.retry_btn)
 
         self.browser.loadFinished.connect(self.on_load_finished)
-        self.browser.setUrl(QUrl("https://www.messenger.com/"))
+        self.browser.setUrl(QUrl("https://www.facebook.com/messages/"))
 
     def resizeEvent(self, event):
         self.overlay.resize(self.size())
@@ -90,7 +90,7 @@ class MessengerWrapper(QMainWindow):
 
         current_url = self.browser.url().toString()
         
-        if "login" in current_url or "messenger.com" in current_url or "facebook.com" in current_url:
+        if "login" in current_url or "messenger.com" in current_url or "facebook.com/messages" in current_url:
             if "/t/" in current_url:
                 self.hide_overlay()
             else:
@@ -170,7 +170,7 @@ class MessengerWrapper(QMainWindow):
     def check_login_success(self):
         current_url = self.browser.url().toString()
         
-        if "login" in current_url or current_url == "https://www.messenger.com/" or current_url == "https://www.facebook.com/":
+        if "login" in current_url or current_url == "https://www.messenger.com/" or current_url == "https://www.facebook.com/" or "facebook.com/messages" in current_url:
             self.update_status("Automatic login failed.", "Possible wrong password or 2FA verification.")
             self.retry_btn.setText("Switch to manual login")
             self.retry_btn.show()
